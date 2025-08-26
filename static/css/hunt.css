@@ -1,0 +1,30 @@
+body { background: #f6e4cb; }
+.hunt-center-box {
+  max-width: 400px;
+  margin: 8em auto 0 auto;
+  background: #fffbe6;
+  border-radius: 1.5em;
+  box-shadow: 0 2px 16px #d6af4133;
+  padding: 3em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.hunt-status-label {
+  font-size: 2em;
+  font-weight: 900;
+  color: #d6af41;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+.hunt-status-value {
+  font-size: 2.5em;
+  font-weight: 900;
+  color: #1a232b;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 0.5em;
+}

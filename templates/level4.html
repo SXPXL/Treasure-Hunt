@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 4</title>
+  <link rel="stylesheet" href="/static/css/level4.css">
+</head>
+<body>
+  <div class="bg-level4" aria-hidden="true">
+    {% for _ in range(12) %}
+      <span>LEVEL 4</span>
+    {% endfor %}
+  </div>
+  <div class="level4-container">
+
+
+    {% if confirm_team %}
+    <form method="post" id="level4-form">
+      <div style="background:#fff3cd;color:#856404;padding:1em 1.5em;border-radius:1em;margin-bottom:1.5em;text-align:center;font-weight:700;">
+        Warning: Team {{ confirm_team }} already exists. Do you want to overwrite the existing clues and codes?<br><br>
+        <button type="submit" name="confirm_overwrite" value="1" class="submit-btn" style="margin-right:1em;">Continue</button>
+        <a href="/level4" class="submit-btn" style="background:#fff;color:#d6af41;border:2px solid #d6af41;">Cancel</a>
+      </div>
+      <input type="hidden" name="team" value="{{ confirm_team }}">
+      {% for i in range(1, 6) %}
+      <input type="hidden" name="clue{{ i }}" value="{{ clues[i-1] }}">
+      <input type="hidden" name="code{{ i }}" value="{{ codes[i-1] }}">
+      {% endfor %}
+    </form>
+    {% else %}
+    <form method="post" id="level4-form">
+      <div class="form-group">
+        <label for="team-select" class="form-label">Team</label>
+        <select id="team-select" name="team" class="form-select" required>
+          <option value="">Select Team</option>
+          <option value="1">Team 1</option>
+          <option value="2">Team 2</option>
+          <option value="3">Team 3</option>
+          <option value="4">Team 4</option>
+          <option value="5">Team 5</option>
+        </select>
+      </div>
+      {% for i in range(1, 6) %}
+      <div class="form-group" style="flex-direction: row; align-items: center; gap: 1em;">
+        <div style="flex:2;">
+          <label for="clue{{ i }}" class="form-label">Clue {{ i }}</label>
+          <input type="text" id="clue{{ i }}" name="clue{{ i }}" class="form-select" placeholder="Enter Clue {{ i }}" required>
+        </div>
+        <div style="flex:1; min-width: 80px;">
+          <label for="code{{ i }}" class="form-label" style="font-size:0.95em;">Code</label>
+          <input type="number" id="code{{ i }}" name="code{{ i }}" class="form-select" style="min-width:60px;max-width:100px;font-size:1em;padding:0 0.5em;" placeholder="Code">
+        </div>
+      </div>
+      {% endfor %}
+      <div style="display: flex; gap: 1em; justify-content: center; align-items: center; margin-top: 2.5em;">
+        <button type="submit" class="submit-btn">
+          <span style="font-size:1.2em;letter-spacing:0.1em;">Submit</span>
+        </button>
+        <button type="button" class="submit-btn" id="show-table-btn" onclick="window.location.href='/table'">
+          <span style="font-size:1.2em;letter-spacing:0.1em;">Show Table</span>
+        </button>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+
+  <script>
+    function fillForm(dataStr) {
+      var data = JSON.parse(dataStr);
+      document.getElementById('team-select').value = data.team;
+      for (let i = 1; i <= 5; i++) {
+        document.getElementById('clue' + i).value = data['clue' + i] || '';
+        document.getElementById('code' + i).value = data['code' + i] || '';
+      }
+    }
+    function toggleTable() {
+      var tableDiv = document.getElementById('teams-table-container');
+      var btn = document.getElementById('show-table-btn');
+      if (tableDiv.style.display === 'none') {
+        tableDiv.style.display = 'block';
+        btn.innerHTML = '<span style="font-size:1.2em;letter-spacing:0.1em;">Hide Table</span>';
+      } else {
+        tableDiv.style.display = 'none';
+        btn.innerHTML = '<span style="font-size:1.2em;letter-spacing:0.1em;">Show Table</span>';
+      }
+    }
+  </script>
+</body>
+</html>

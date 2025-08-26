@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js';
+      script.onload = function() {
+        window.lottie && window.lottie.loadAnimation({
+          container: document.getElementById('lottie-global-box'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/UI/Treasure box.json'
+        });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f6e4cb">
+  <title>MEMOQUEST Login</title>
+  <link rel="stylesheet" href="/static/css/login.css">
+    <script src="/static/js/loading.js"></script>
+    <script src="/static/js/login.js"></script>
+  </head>
+  <body>
+    <div class="bg-login">
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+      <span>LOGIN</span>
+    </div>
+    <div class="container">
+      <div class="memoquest">MEMOQUEST</div>
+      <div class="map-icon"><img src="/static/images/map.png" alt="Map Icon"></div>
+      <form class="login-form" method="POST" action="/login">
+        <label class="form-label" for="team_num">ENTER YOUR TEAM NUMBER:</label>
+        <input class="form-input" name="team_num" id="team_num" type="number" placeholder="" autocomplete="off" step="1" required>
+        <label class="form-label" for="password">ENTER YOUR PASSKEY:</label>
+        <input class="form-input" name="password" id="password" type="text" pattern="[A-Za-z0-9]+" title="Alphanumeric only" autocomplete="off" required>
+        <button class="submit-btn" type="submit">SUBMIT</button>
+      </form>
+      </form>

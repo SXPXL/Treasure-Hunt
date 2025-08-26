@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hunt</title>
+  <link rel="stylesheet" href="/static/css/level4.css">
+  <link rel="stylesheet" href="/static/css/hunt.css">
+</head>
+<body>
+  <div class="bg-level4" aria-hidden="true">
+    <span>HUNT</span>
+  </div>
+  <div class="hunt-center-box">
+    {% if clue_text %}
+      <div class="hunt-status-label">Clue {{ clue_num if clue_num else '' }}</div>
+      <div class="hunt-status-value" style="margin-bottom:1.2em;">{{ clue_text }}</div>
+      {% if clue_num <= 5 %}
+        <form method="post" style="margin-top:0;display:flex;flex-direction:column;align-items:center;gap:1.2em;width:100%;">
+          <input type="number" name="number_input" placeholder="Enter code for this clue" min="0" class="form-select" style="width:80%;max-width:220px;min-height:2.5em;font-size:1.2em;">
+          <button type="submit" class="submit-btn" style="width:80%;max-width:220px;">
+            <span style="font-size:1.2em;letter-spacing:0.1em;">Submit</span>
+          </button>
+        </form>
+      {% endif %}
+      {% if error %}
+        <div style="color:#d9534f;font-weight:700;margin-top:1em;">{{ error }}</div>
+      {% endif %}
+    {% else %}
+      <div class="hunt-status-label">No clue available</div>
+    {% endif %}
+  </div>
+</body>
+</html>

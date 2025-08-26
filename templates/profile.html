@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js';
+      script.onload = function() {
+        window.lottie && window.lottie.loadAnimation({
+          container: document.getElementById('lottie-global-box'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/UI/Treasure box.json'
+        });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f6e4cb">
+  <title>PROFILE - MemoQuest</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900,700" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+</head>
+<body>
+  <div class="bg-profile" aria-hidden="true">
+    <span>PROFILE</span>
+    <span>PROFILE</span>
+    <span>PROFILE</span>
+    <span>PROFILE</span>
+    <span>PROFILE</span>
+    <span>PROFILE</span>
+  </div>
+
+  <div class="header-bar">
+    <a href="{{ url_for('home') }}" style="text-decoration:none;"><span class="memoquest-logo">MEMOQUEST</span></a>
+  </div>
+
+  <div class="profile-avatar" style="position:relative;">
+    <div class="avatar-inner">
+      {% if profile_photo_url %}
+        <img src="{{ profile_photo_url }}" alt="Profile Photo" style="width:100px; height:100px; object-fit:cover; border-radius:50%; background:#fff;">
+      {% else %}
+        <!-- User icon SVG (matches image) -->
+        <svg class="avatar-ico" viewBox="0 0 100 100">
+          <circle cx="50" cy="36" r="23" fill="#fff"/>
+          <path d="M14,81a36,36,0,0,1,72,0" fill="#fff"/>
+        </svg>
+      {% endif %}
+      <form action="{{ url_for('upload_profile_photo') }}" method="post" enctype="multipart/form-data" style="position:absolute; bottom:0; right:0;">
+        <label style="cursor:pointer; background:#d6af41; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px #d6af4109; border:none; position:relative;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="4" stroke="#06263b" stroke-width="2"/><rect x="2.5" y="7.5" width="19" height="13" rx="3.5" stroke="#06263b" stroke-width="2"/><path d="M7 7V5.5A2.5 2.5 0 0 1 9.5 3h5A2.5 2.5 0 0 1 17 5.5V7" stroke="#06263b" stroke-width="2"/></svg>
+          <input type="file" name="profile_photo" accept="image/*" style="display:none;" onchange="this.form.submit()">
+        </label>
+      </form>
+    </div>
+  </div>
+
+  <div class="main-section">
+    <div class="yellow-box">
+      <span>TEAM NUMBER : {{ team_num }}</span>
+    </div>
+    <div class="tm-label">TEAM MEMBERS :</div>
+    <div class="yellow-box sm">
+      <div class="members-list">
+        {% for member in members %}
+          <span>{{ loop.index }}. {{ member.strip() }}</span><br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="btn-yellow btn-quit">
+      <!-- Red X/svg -->
+      <svg viewBox="0 0 38 38"><line x1="8" y1="8" x2="30" y2="30" stroke="#be2727" stroke-width="6" stroke-linecap="round"/><line x1="30" y1="8" x2="8" y2="30" stroke="#be2727" stroke-width="6" stroke-linecap="round"/></svg>
+      <span class="btn-label">QUIT</span>
+    </div>
+    <a href="{{ url_for('gallery') }}" class="btn-yellow btn-gallery" style="text-decoration:none;">
+      <!-- Gallery image svg -->
+      <svg viewBox="0 0 42 32"><rect x="4" y="6" width="34" height="20" rx="5" fill="none" stroke="#06263b" stroke-width="3"/><rect x="12" y="11" width="10" height="8" rx="2.5" fill="none" stroke="#06263b" stroke-width="2"/><circle cx="32" cy="14" r="2.2" fill="#06263b"/></svg>
+      <span class="btn-label">GALLERY</span>
+    </a>
+    <a href="/logout" class="btn-yellow btn-logout" style="text-decoration:none;">
+      <!-- Logout arrow icon -->
+      <svg viewBox="0 0 38 32"><rect x="4" y="8" width="17" height="16" fill="none" stroke="#06263b" stroke-width="3" rx="4"/><polyline points="27,24 34,16 27,8" fill="none" stroke="#06263b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="15" y1="16" x2="33" y2="16" stroke="#06263b" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="btn-label">LOGOUT</span>
+    </a>
+  </div>
+</body>
+</html>

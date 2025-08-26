@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js';
+      script.onload = function() {
+        window.lottie && window.lottie.loadAnimation({
+          container: document.getElementById('lottie-global-box'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/UI/Treasure box.json'
+        });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Manual Elimination - Admin</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900,700" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_manual_elimination.css') }}">
+    <script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin_manual_elimination.js') }}"></script>
+</head>
+<body>
+  <div class="header-bar">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-controls="drawerMenu" aria-expanded="false" onclick="openDrawer()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="avatar" onclick="window.location.href='/admin/profile'" title="Profile"></div>
+  </div>
+  <nav class="drawer" id="drawerMenu" aria-hidden="true" tabindex="-1" style="background:#d6af41; border-top-right-radius:2.2em;">
+    <div class="drawer-header" style="padding-top:2em;">
+      <span class="drawer-title" style="font-size:1.5em; font-weight:900; color:#1a232b; letter-spacing:2px;">MEMOQUEST</span>
+      <button class="drawer-close" aria-label="Close menu" onclick="closeDrawer()" style="font-size:2em; color:#1a232b; background:none; border:2px solid #1a232b; border-radius:0.7em; padding:0.1em 0.3em; margin-left:1em;">&rarr;</button>
+    </div>
+    <div class="drawer-content" style="flex:1; overflow-y:auto; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:2.5em;">
+        <div style="width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1.2em;">
+          <div style="font-size:2em; font-weight:900; color:#1a232b; margin-bottom:0.7em; letter-spacing:1px; text-align:center;">HELLO, ADMIN</div>
+          <form method="get" action="/admin" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l9-9 9 9v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-9z" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              HOME
+            </button>
+          </form>
+          <form method="get" action="/admin/team_details" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true" style="background:linear-gradient(135deg,#fffbe6 60%,#ffe7b2 100%);">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4Zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              TEAM DETAILS
+            </button>
+          </form>
+          <form method="get" action="/admin/leaderboard" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M7 21V7m5 14V3m5 18v-8" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              LEADERBOARD
+            </button>
+          </form>
+          <form method="get" action="/admin/manual_elimination" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M6 18L18 6" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              MANUAL ELIMINATION
+            </button>
+          </form>
+          <form method="get" action="/admin/game_constraints" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#d6af41" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              GAME CONSTRAINTS
+            </button>
+          </form>
+        </div>
+    </div>
+  </nav>
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="container">
+    <div class="title">MANUAL ELIMINATION</div>
+    <div class="desc">Select a team and enter a reason to eliminate them from the game.</div>
+    <form method="post" style="display:flex;flex-direction:column;align-items:center;gap:1.2em;max-width:340px;margin:0 auto;">
+      <label for="team_num" style="font-weight:700;font-size:1.1em;color:#1a232b;margin-bottom:0.3em;">Select Team:</label>
+      <select name="team_num" id="team_num" required style="width:100%;padding:0.7em 1em;border-radius:8px;border:2px solid #d6af41;font-size:1.1em;background:#fffbe6;color:#1a232b;font-weight:700;">
+        <option value="" disabled selected>Select team</option>
+        {% for team in teams %}
+          <option value="{{ team.team_num }}">{{ team.team_num }}</option>
+        {% endfor %}
+      </select>
+      <label for="reason" style="font-weight:700;font-size:1.1em;color:#1a232b;margin-bottom:0.3em;">Reason:</label>
+      <textarea name="reason" id="reason" rows="3" required style="width:100%;padding:0.7em 1em;border-radius:8px;border:2px solid #d6af41;font-size:1.1em;background:#fffbe6;color:#1a232b;font-weight:700;"></textarea>
+      <button type="submit" style="padding:0.7em 2em;background:#d6af41;color:#1a232b;font-weight:900;border-radius:8px;border:none;cursor:pointer;font-size:1.1em;box-shadow:0 2px 8px #d6af41a0;margin-top:0.7em;">Eliminate Team</button>
+    </form>
+    {% if eliminated_teams %}
+    <div style="margin-top:2.5em;">
+      <div style="font-size:1.3em;font-weight:900;color:#d6af41;text-align:center;margin-bottom:0.7em;letter-spacing:1px;">Eliminated Teams</div>
+      <table style="width:100%;border-collapse:collapse;background:#fffbe6;border-radius:12px;box-shadow:0 2px 8px #d6af41a0;overflow:hidden;">
+        <thead>
+          <tr style="background:#d6af41;color:#fff;font-weight:900;font-size:1.1em;">
+            <th style="padding:0.7em 0.3em;">Team</th>
+            <th style="padding:0.7em 0.3em;">Reason</th>
+            <th style="padding:0.7em 0.3em;">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for elim in eliminated_teams %}
+          <tr style="border-bottom:1px solid #d6af41;">
+            <td style="padding:0.7em 0.3em;font-weight:700;color:#1a232b;text-align:center;">{{ elim.team_num }}</td>
+            <td style="padding:0.7em 0.3em;color:#1a232b;">{{ elim.reason }}</td>
+            <td style="padding:0.7em 0.3em;color:#1a232b;text-align:center;">{{ elim.created_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>

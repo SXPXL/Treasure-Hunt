@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Loading...</title>
+  <style>
+    body {
+      background: #fffbe6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    #lottie-box {
+      width: 320px;
+      height: 320px;
+      margin: auto;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loading-text {
+      position: absolute;
+      bottom: 10vh;
+      left: 0;
+      width: 100vw;
+      text-align: center;
+      font-size: 2em;
+      font-weight: 900;
+      color: #d6af41;
+      letter-spacing: 2px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+</head>
+<body>
+  <div id="lottie-box"></div>
+  <div class="loading-text">Loading...</div>
+  <script>
+    var animationDataUrl = '/static/UI/treasure.json';
+    fetch(animationDataUrl)
+      .then(response => response.json())
+      .then(data => {
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-box'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: data
+        });
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 4 Data Table</title>
+  <link rel="stylesheet" href="/static/css/level4.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+  <style>
+    .table-container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #fffbe6;
+      border-radius: 1.5em;
+      box-shadow: 0 2px 16px #d6af4133;
+      padding: 2em 1em 2em 1em;
+    }
+    .level4-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 1em;
+      overflow: hidden;
+      margin-bottom: 1.5em;
+    }
+    .level4-table th, .level4-table td {
+      padding: 0.8em 0.5em;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    .level4-table th {
+      background: #f0e6c3;
+      color: #b4881c;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .level4-table td {
+      background: #fffbe6;
+      color: #1a232b;
+      font-weight: 700;
+    }
+    .edit-btn {
+      background: linear-gradient(90deg,#d6af41,#b4881c);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1em;
+      padding: 0.5em 1.5em;
+      border: none;
+      border-radius: 1.2em;
+      box-shadow: 0 2px 8px #d6af4144;
+      letter-spacing: 0.08em;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      cursor: pointer;
+      text-transform: uppercase;
+      margin: 0 auto;
+      display: block;
+    }
+    .edit-btn:hover, .edit-btn:focus {
+      background: linear-gradient(90deg,#b4881c,#d6af41);
+      box-shadow: 0 4px 16px #d6af4144;
+      transform: translateY(-2px) scale(1.04);
+      outline: none;
+    }
+    .table-title {
+      text-align: center;
+      font-size: 2em;
+      font-weight: 900;
+      color: #d6af41;
+      margin-bottom: 1.5em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-level4" aria-hidden="true">
+    <span>LEVEL 4</span>
+  </div>
+  <div class="header-bar">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-controls="drawerMenu" aria-expanded="false" onclick="openDrawer()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="avatar" onclick="window.location.href='/admin/profile'" title="Profile"></div>
+  </div>
+  <nav class="drawer" id="drawerMenu" aria-hidden="true" tabindex="-1" style="background:#d6af41; border-top-right-radius:2.2em;">
+    <div class="drawer-header" style="padding-top:2em;">
+      <span class="drawer-title" style="font-size:1.5em; font-weight:900; color:#1a232b; letter-spacing:2px;">MEMOQUEST</span>
+      <button class="drawer-close" aria-label="Close menu" onclick="closeDrawer()" style="font-size:2em; color:#1a232b; background:none; border:2px solid #1a232b; border-radius:0.7em; padding:0.1em 0.3em; margin-left:1em;">&rarr;</button>
+    </div>
+    <div class="drawer-content" style="flex:1; overflow-y:auto; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:2.5em;">
+        <div style="width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1.2em;">
+          <div style="font-size:2em; font-weight:900; color:#1a232b; margin-bottom:0.7em; letter-spacing:1px; text-align:center;">HELLO, ADMIN</div>
+          <form method="get" action="/admin" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l9-9 9 9v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-9z" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              HOME
+            </button>
+          </form>
+          <form method="get" action="/admin/team_details" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true" style="background:linear-gradient(135deg,#fffbe6 60%,#ffe7b2 100%);">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4Zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              TEAM DETAILS
+            </button>
+          </form>
+          <form method="get" action="/admin/leaderboard" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M7 21V7m5 14V3m5 18v-8" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              LEADERBOARD
+            </button>
+          </form>
+          <form method="get" action="/admin/manual_elimination" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M6 18L18 6" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              MANUAL ELIMINATION
+            </button>
+          </form>
+          <form method="get" action="/admin/game_constraints" style="width:100%;margin:0;padding:0;">
+            <button type="submit" class="drawer-box-btn" style="width:100%;max-width:320px;height:3.2em;font-size:1.2em;margin:0 auto;display:flex;align-items:center;gap:1em;">
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#d6af41" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#d6af41" stroke-width="2"/></svg>
+              </span>
+              GAME CONSTRAINTS
+            </button>
+          </form>
+        </div>
+    </div>
+  </nav>
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="table-container">
+    <div style="display: flex; flex-wrap: wrap; gap: 2em; justify-content: center;">
+      {% for row in teams_data %}
+      <div style="background:#fffbe6; border-radius:1.5em; box-shadow:0 2px 16px #d6af4133; padding:1.5em 1.2em; min-width:270px; max-width:340px; margin-bottom:1.5em;">
+  <form method="post" action="/table/edit" style="margin:0;">
+          <div style="text-align:center; font-size:1.3em; font-weight:900; color:#b4881c; margin-bottom:1em; letter-spacing:1px;">Team {{ row.team }}</div>
+          <input type="hidden" name="team" value="{{ row.team }}">
+          <table class="level4-table" style="margin-bottom:1em;">
+            <thead>
+              <tr>
+                <th>Clue No</th>
+                <th>Clue</th>
+                <th>Code</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in range(1,6) %}
+              <tr>
+                <td>{{ i }}</td>
+                <td><input type="text" name="clue{{i}}" value="{{ row['clue' ~ i] }}" style="width:100%;padding:0.3em 0.5em;border-radius:0.7em;border:1px solid #d6af41;font-size:1em;" disabled></td>
+                <td><input type="number" name="code{{i}}" value="{{ row['code' ~ i] }}" style="width:80px;padding:0.3em 0.5em;border-radius:0.7em;border:1px solid #d6af41;font-size:1em;" disabled></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="button" class="edit-btn" onclick="enableEdit(this)">Edit</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <script>
+    function enableEdit(btn) {
+      var form = btn.closest('form');
+      var inputs = form.querySelectorAll('input[type="text"], input[type="number"]');
+      inputs.forEach(function(input) { input.disabled = false; });
+      btn.textContent = 'Save';
+      btn.type = 'button';
+      btn.onclick = function() {
+        btn.type = 'submit';
+        form.submit();
+      };
+    }
+    // Example: You can use JS to fetch and render table data, or let Flask/Jinja render rows
+    // function editRow(team) { ... }
+  </script>
+</body>
+</html>

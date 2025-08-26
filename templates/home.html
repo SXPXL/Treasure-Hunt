@@ -1,0 +1,373 @@
+<style>
+    .levels-section, .level-btn {
+      position: relative;
+      z-index: 1;
+    }
+    .drawer, .drawer-overlay {
+      position: fixed !important;
+      z-index: 99999 !important;
+    }
+</style>
+  <style>
+    .profile-icon {
+      position: absolute;
+      top: 1.2em;
+      right: 1.2em;
+      width: 2.4em;
+      height: 2.4em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: none;
+      border: none;
+      z-index: 3100;
+      cursor: pointer;
+      box-shadow: none;
+      padding: 0;
+    }
+    .profile-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .header {
+      position: relative;
+    }
+  </style>
+  <div class="avatar" onclick="window.location.href='/profile'" title="Profile"></div>
+  <style>
+    .avatar {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 4;
+      font-size: 2.2rem;
+      cursor: pointer;
+    }
+    .avatar::before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      background: url('https://cdn-icons-png.flaticon.com/512/64/64572.png') center/cover no-repeat;
+    }
+    @media (max-width: 600px) {
+      .avatar { width: 28px; height: 28px; top: 6px; right: 6px; }
+      .avatar::before { width: 14px; height: 14px; }
+    }
+  </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      if (!document.getElementById('global-loading-overlay')) {
+        var overlay = document.createElement('div');
+        overlay.id = 'global-loading-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.background = '#fffbe6';
+        overlay.style.zIndex = '99999';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+        document.body.appendChild(overlay);
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js';
+        script.onload = function() {
+          window.lottie && window.lottie.loadAnimation({
+            container: document.getElementById('lottie-global-box'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/UI/Treasure box.json'
+          });
+        };
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
+  <script>
+    (function(){
+      var overlay = document.createElement('div');
+      overlay.id = 'global-loading-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = '#fffbe6';
+      overlay.style.zIndex = '99999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.innerHTML = '<div id="lottie-global-box" style="width:220px;height:220px;"></div><div style="position:absolute;bottom:10vh;left:0;width:100vw;text-align:center;font-size:2em;font-weight:900;color:#d6af41;letter-spacing:2px;font-family:Montserrat,Arial,sans-serif;">Loading...</div>';
+      document.body.appendChild(overlay);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f6e4cb">
+  <title>LEVEL UP - MemoQuest</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900,700" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/home.css">
+    <script src="/static/js/loading.js"></script>
+    <script src="/static/js/home.js"></script>
+</head>
+<body>
+  <div class="bg-levelup" aria-hidden="true">
+    {% for _ in range(12) %}
+      <span>LEVEL UP</span>
+    {% endfor %}
+  </div>
+  {% if eliminated_message %}
+    <div id="elim-dim-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,30,30,0.45);z-index:9998;pointer-events:none;"></div>
+    <div id="elim-popup" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:#fffbe6;border-radius:1.2em;box-shadow:0 4px 32px #d6af41a0;padding:2em 1.5em 1.5em 1.5em;font-size:1.3em;font-weight:900;color:#d9534f;text-align:center;letter-spacing:1px;max-width:340px;width:90vw;border:4px solid #d6af41;pointer-events:none;">
+      {{ eliminated_message }}
+    </div>
+  {% endif %}
+  <div class="header-bar">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-controls="drawerMenu" aria-expanded="false" onclick="openDrawer()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  <!-- Drawer and overlay moved to end of body for proper stacking -->
+  <style>
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 85vw;
+      max-width: 420px;
+      height: 100vh;
+      background: #d6af41;
+      box-shadow: 2px 0 16px #0002;
+  z-index: 99999;
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+      display: flex;
+      flex-direction: column;
+      border-top-right-radius: 2.2em;
+      outline: none;
+    }
+    .drawer.open {
+      transform: translateX(0);
+    }
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2em 1.2em 0.5em 1.2em;
+    }
+    .drawer-title {
+      font-size: 1.3em;
+      font-weight: 900;
+      color: #1a232b;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .drawer-close {
+      background: none;
+      border: 2px solid #1a232b;
+      font-size: 2em;
+      color: #1a232b;
+      cursor: pointer;
+      border-radius: 0.7em;
+      padding: 0.1em 0.3em;
+      margin-left: 1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f6e4cb;
+    }
+    .drawer-content {
+      padding: 0 1.2em 1.2em 1.2em;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .drawer-section-title {
+      font-size: 1.25em;
+      font-weight: 900;
+      color: #1a232b;
+      margin: 1.2em 0 0.7em 0;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .team-details {
+      margin-bottom: 1.2em;
+    }
+    .team-arrow-box {
+      background: #f6e4cb;
+      border-radius: 0 2em 2em 0;
+      padding: 1.2em 1.2em 1.2em 2.5em;
+      margin-left: -1.5em;
+      font-size: 1.1em;
+      font-weight: 900;
+      color: #1a232b;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7em;
+      position: relative;
+      min-width: 70%;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .leaderboard-entry {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.2em;
+    }
+    .leaderboard-arrow-box {
+      background: #f6e4cb;
+      border-radius: 0 2em 2em 0;
+      padding: 1.2em 1.2em 1.2em 2.5em;
+      margin-left: -1.5em;
+      font-size: 1.1em;
+      font-weight: 900;
+      color: #1a232b;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7em;
+      min-width: 60%;
+      box-shadow: 0 2px 8px #0001;
+      position: relative;
+    }
+    .medal {
+      font-size: 2.1em;
+      font-weight: 900;
+      margin-left: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2em;
+      height: 2.2em;
+      border-radius: 50%;
+      background: #f6e4cb;
+      border: 4px solid #1a232b;
+      position: relative;
+    }
+    .medal-1 { color: #ffb300; border-color: #ffb300; }
+    .medal-2 { color: #7ec0ee; border-color: #7ec0ee; }
+    .medal-3 { color: #ff914d; border-color: #ff914d; }
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.18);
+  z-index: 99998;
+      display: none;
+    }
+    .drawer-overlay.open {
+      display: block;
+    }
+  </style>
+  </div>
+  <style>
+    .hamburger {
+      width: 2.6em;
+      height: 2.6em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #0001;
+      cursor: pointer;
+      padding: 0.4em;
+      margin-right: 0.4em;
+    }
+    .hamburger span {
+      display: block;
+      width: 1.8em;
+      height: 0.32em;
+      background: #1a232b;
+      border-radius: 2px;
+      margin: 0.19em 0;
+      transition: all 0.2s;
+    }
+  </style>
+  <div class="levels-section">
+    {% for i in range(1, 5) %}
+      {% if i == 4 %}
+        {% if is_live_for_level4 %}
+          <a href="/hunt" style="text-decoration:none;">
+            <button class="level-btn" style="background:#fffbe6;color:#d6af41;">
+              <span class="level-label">LEVEL 4</span>
+            </button>
+          </a>
+        {% else %}
+          <button class="level-btn locked" disabled>
+            <span class="lock-icon"></span>
+          </button>
+        {% endif %}
+      {% elif level_types and i in level_types %}
+        {% set type_url = level_types[i] %}
+        {% if type_url == 'quiz' %}
+          <a href="/quiz" style="text-decoration:none;">
+        {% elif type_url == 'puzzle' %}
+          <a href="/puzzle" style="text-decoration:none;">
+        {% elif type_url == 'task' %}
+          <a href="/task" style="text-decoration:none;">
+        {% else %}
+          <a href="#" style="text-decoration:none;">
+        {% endif %}
+          <button class="level-btn" style="background:#fffbe6;color:#d6af41;">
+            <span class="level-label">LEVEL {{ i }}</span>
+          </button>
+        </a>
+      {% else %}
+        <button class="level-btn locked" disabled>
+          <span class="lock-icon"></span>
+        </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+</body>
+<!-- Drawer and overlay moved to end of body for proper stacking -->
+<nav class="drawer" id="drawerMenu" aria-hidden="true" tabindex="-1">
+  <div class="drawer-header">
+    <span class="drawer-title">MEMOQUEST</span>
+    <button class="drawer-close" aria-label="Close menu" onclick="closeDrawer()">&rarr;</button>
+  </div>
+  <div class="drawer-content">
+    <div class="drawer-section-title">TEAM DEATILS :</div>
+    <div class="team-details">
+      <div class="team-arrow-box">
+        <div><b>TEAM NUMBER:</b> {{ user.team_num if user else '' }}</div>
+        <div><b>SCORE :</b> {{ user.score if user else '' }}</div>
+        <div><b>POSITION :</b> {{ user.position if user and user.position is not none else '' }}</div>
+      </div>
+    </div>
+    <div class="drawer-section-title" style="margin-top:2em;">LEADERBOARD</div>
+    {% for entry in leaderboard %}
+    <div class="leaderboard-entry">
+      <div class="leaderboard-arrow-box">
+        <div><b>TEAM NO :</b> {{ entry.team_num }}</div>
+        <div><b>SCORE :</b> {{ entry.score }}</div>
+      </div>
+      <div class="medal medal-{{ loop.index }}">{{ loop.index }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+</html>
+</body>
+</html>
