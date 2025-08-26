@@ -190,7 +190,7 @@ con = mysql.connector.connect(
 )
 con.autocommit = True
 
-# Route for logout
+# Route for logout 
 @app.route('/logout')
 def logout():
     session.clear()
